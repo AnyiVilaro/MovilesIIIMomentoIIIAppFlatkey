@@ -14,6 +14,7 @@ const UserSchema = new Schema({
         validate: [validateEmail, 'Ingrese un correo válido'],
     },
     password: {type: String},
+    isowner: {type: Boolean},
     date: {type: Date, default: Date.now}
 });
 

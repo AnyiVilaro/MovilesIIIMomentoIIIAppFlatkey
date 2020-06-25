@@ -48,7 +48,23 @@ let controller = {
         const properties = await Property.find({ landlord: email});        
         
         if(properties && properties.length > 0){
-            return res.status(200).json(setResponse({properties}, true));
+            return res.status(200).json(setResponse(properties, true));
+        }else{
+            let errorRes = {
+                error: {
+                    title: "Error",
+                    message: "Not found"
+                }
+            };
+            return res.status(404).json(setResponse(errorRes, false));
+        }
+    },
+    listSortedByUser: async (req,res) =>{
+        const { email } = req.query    
+        const properties = await Property.find({ landlord: email}).sort({"price" : 1});        
+        
+        if(properties && properties.length > 0){
+            return res.status(200).json(setResponse(properties, true));
         }else{
             let errorRes = {
                 error: {
@@ -63,7 +79,7 @@ let controller = {
         const properties = await Property.find();
         
         if(properties){
-            return res.status(200).json(setResponse({properties}, true));
+            return res.status(200).json(setResponse(properties, true));
         }else{
             let errorRes = {
                 error: {
@@ -78,7 +94,7 @@ let controller = {
         const properties = await Property.find().sort({"price" : 1});
         
         if(properties){
-            return res.status(200).json(setResponse({properties}, true));
+            return res.status(200).json(setResponse(properties, true));
         }else{
             let errorRes = {
                 error: {

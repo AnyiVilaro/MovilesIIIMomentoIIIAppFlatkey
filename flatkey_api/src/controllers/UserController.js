@@ -2,8 +2,8 @@ import User from '../models/UserModel';
 
 let controller = {
     add: async (req, res) => {
-        const {name, lastname, email, password} = req.body;
-        const newUser = new User({name, lastname, email, password});        
+        const {name, lastname, email, password, isowner} = req.body;
+        const newUser = new User({name, lastname, email, password, isowner});        
         if (name && lastname && email && password){
             const user = await User.findOne({email: email});
             if (user != null){
@@ -91,7 +91,7 @@ let controller = {
             let errorRes = {
                 error: {
                     title: "Error",
-                    message: "Email and password are invalid"
+                    message: "Not found"
                 }
             };
             return res.status(404).json(setResponse(errorRes, false));                                 
@@ -113,8 +113,8 @@ let controller = {
     },
     update: async (req,res) => {
         const { id } = req.params;
-        const { name, lastname, email, password } = req.body;
-        await User.findByIdAndUpdate(id,{name, lastname, email, password});
+        const { name, lastname, email, password, isowner } = req.body;
+        await User.findByIdAndUpdate(id,{name, lastname, email, password, isowner});
         return res.status(200).json(
             setResponse({}, true)
         );
@@ -156,15 +156,13 @@ function setResponse(response, isSuccess){
             }
         };
     }else{
+        
         resp = {
             res: {
                 success: false,
-                error: {
-                    title: "",
-                    message: response.error
-                }
+                error: response.error
             }
-        };
+        };        
     }
     
     return resp;
