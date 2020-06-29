@@ -1,0 +1,27 @@
+{% extends 'layout.html'%}
+
+{% block body %}
+<div class="row pt-5 pb-5">
+    <div class="col-md-12">
+        <div class="card" style="width: 100%;">
+            <img class="card-img-top" src="/static/images/00{{ range(1, 10) | random }}.png" alt="{{title}}" style="width: 100%;height: 100%;">
+            <div class="card-body">
+                <h5 class="card-title">Property:</h5>
+                <p class="card-text">{{title}}</p>
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item"><strong>Type: </strong>{{_type}}</li>
+                <li class="list-group-item"><strong>Address: </strong>{{address}}</li>
+                <li class="list-group-item"><strong>Rooms: </strong>{{rooms}}</li>
+                <li class="list-group-item"><strong>Price: </strong>{{price}}</li>
+                <li class="list-group-item"><strong>Area: </strong>{{area}}</li>
+            </ul>
+            <div class="card-body">
+                <a href="javascript:history.back()" class="card-link">Go back</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

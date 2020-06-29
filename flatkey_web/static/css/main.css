@@ -1,0 +1,8 @@
+.top-buffer { 
+    margin-top:20px; 
+}
+
+.card-img, .card-img-top {
+    width: 29rem;
+    height: 18rem;
+}

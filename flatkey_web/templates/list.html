@@ -1,0 +1,59 @@
+{% extends 'layout.html'%}
+
+{% set is_owner = isowner %}
+
+{% block body %}
+<div class="row">
+    <div class="col-md"></div>
+    <div class="col-md-6">
+        {% with messages = get_flashed_messages()  %}
+        {% if messages  %}
+        {% for message in messages  %}
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        {% endfor  %}
+        {% endif  %}
+        {% endwith  %}
+    </div>
+    <div class="col-md"></div>
+</div>
+
+{% for property in properties %}
+
+{% if loop.index % 2 != 0 %}
+<div class="row top-buffer">
+    {% endif %}
+
+    <div class="col-md">
+        <div class="card" style="width: 29rem;">
+            <img class="card-img-top" src="/static/images/00{{ range(1, 10) | random }}.png" alt="{{property.title}}">
+            <div class="card-body">
+                <h5 class="card-title">Property:</h5>
+                <p class="card-text">{{property.title}}</p>
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item"><strong>Price: </strong>{{property.price}}</li>
+            </ul>
+            <div class="card-body">
+                <a href="/details?title={{property.title}}&_type={{property.type}}&address={{property.address | replace('#','%23') }}&rooms={{property.rooms}}&price={{property.price}}&area={{property.area}}" class="card-link">Details</a>
+                {% if isowner is defined %}
+                    {% if isowner == "True" %}
+                        <a href="/update/{{property._id}}" class="card-link">Update</a>
+                        <a href="/delete-property/{{property._id}}/{{property.landlord}}/True" class="card-link btn-delete">Delete</a>
+                    {% endif %}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    {% if loop.index % 2 == 0 %}
+</div>
+{% endif %}
+
+{% endfor %}
+
+
+{% endblock %}

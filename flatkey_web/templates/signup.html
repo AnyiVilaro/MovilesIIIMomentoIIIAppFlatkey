@@ -1,0 +1,51 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+<div class="row">
+    <div class="col-md"></div>
+    <div class="col-md-6">
+        {% with messages = get_flashed_messages()  %}
+        {% if messages  %}
+        {% for message in messages  %}
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        {% endfor  %}
+        {% endif  %}
+        {% endwith  %}
+    </div>
+    <div class="col-md"></div>
+</div>
+
+
+<div class="row">
+    <div class="col-md"></div>
+    <div class="col-md">
+
+        <form action="/createuser" method="POST">
+            <div class="form-group">
+                <input type="text" class="form-control" name="name" placeholder="Name">
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" name="lastname" placeholder="Lastname">
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" name="email" placeholder="Email">
+            </div>
+            <div class="form-group">
+                <input type="password" class="form-control" name="password" placeholder="Password">
+            </div>
+            <div class="form-group form-check">
+                <input type="checkbox" class="form-check-input" id="checkOwner" name="isowner">
+                <label class="form-check-label" for="checkOwner">Do you want to sign up as a owner?</label>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Sign up</button>
+        </form>
+
+    </div>
+    <div class="col-md"></div>
+</div>
+{% endblock %}
