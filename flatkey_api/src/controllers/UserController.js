@@ -15,7 +15,7 @@ let controller = {
                 };
                 return res.status(500).json(setResponse(errorRes, false));
             }
-            await newUser.save((error, document) => {                
+            await newUser.save((error, document) => {
                 // check for errors
                 let errors = getErrors(error);
                 // Send errors                
