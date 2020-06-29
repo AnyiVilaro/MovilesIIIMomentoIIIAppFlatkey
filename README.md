@@ -2,7 +2,7 @@
 Proyecto integrador - Alquiler de viviendas
 
 
-##Para ejecutar la aplicación movil:
+## Para ejecutar la aplicación movil:
 Crear una base de datos en MongoDB con el nombre flatkey_db y dos colecciones: users y properties
 
 ```sh
@@ -10,14 +10,14 @@ $ npm install
 $ expo start
 ```
 
-##Para ejecutar la api de node js:
+## Para ejecutar la api de node js:
 
 ```sh
 $ npm install
 $ npm run starttest
 ```
 
-##Para ejecutar la aplicación web de Python con Flask:
+## Para ejecutar la aplicación web de Python con Flask:
 ```sh
 $ python App.py
 ```
@@ -34,7 +34,7 @@ $ adb devices
 ```
 
 
-#Los integrantes del equipo son:
+# Los integrantes del equipo son:
 
 Anyi Milena Vilaró de la Ossa
 Andrea Nataly Valderrama Garcia
