@@ -32,3 +32,12 @@ $ adb connect 127.0.0.1:62001
 ```sh
 $ adb devices
 ```
+
+
+#Los integrantes del equipo son:
+
+Anyi Milena Vilaró de la Ossa
+Andrea Nataly Valderrama Garcia
+Alejandro Echavarria Cano
+Juliana Ramirez Peralta
+Sebastian Agudelo Gonzalez
