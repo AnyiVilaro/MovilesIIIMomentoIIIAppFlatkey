@@ -22,7 +22,7 @@ def Login():
         password = request.form['password']
         payload = {'email': email, 'password': password}
         try:
-            response = requests.post('http://192.168.100.165:3000/api/user/validate', data=payload)
+            response = requests.post('http://192.168.0.7:3000/api/user/validate', data=payload)
             json = response.json()
             if response.status_code == 200:
                 print(json["res"]["data"][0]["user"])
@@ -46,7 +46,7 @@ def Login():
 @app.route("/user/<email>", methods=['GET'])
 def RedirectUser(email=None):
     payload = {'email': email}
-    response = requests.post('http://192.168.100.165:3000/api/user/get', data=payload)
+    response = requests.post('http://192.168.0.7:3000/api/user/get', data=payload)
     json = response.json()
     if response.status_code == 200:
         isowner = json["res"]["data"][0]["user"]["isowner"]
@@ -71,7 +71,7 @@ def List(email=None, isowner=None, properties_sorted=None):
 
     print(endpoint)
 
-    response = requests.get('http://192.168.100.165:3000/api/property/'+endpoint)
+    response = requests.get('http://192.168.0.7:3000/api/property/'+endpoint)
     json = response.json()
     if response.status_code == 200:
         data = json["res"]["data"][0]
@@ -88,7 +88,7 @@ def ListAll():
         endpoint = 'list'
     
     #If user is a guest
-    response = requests.get('http://192.168.100.165:3000/api/property/'+endpoint)
+    response = requests.get('http://192.168.0.7:3000/api/property/'+endpoint)
     json = response.json()
     if response.status_code == 200:
         data = json["res"]["data"][0]
@@ -115,7 +115,7 @@ def CreateUser():
             isowner = "true"
         payload = {'name': name, 'lastname': lastname, 'email': email, 'password': password, 'isowner': isowner}
         try:
-            response = requests.post('http://192.168.100.165:3000/api/user/add', data=payload)
+            response = requests.post('http://192.168.0.7:3000/api/user/add', data=payload)
             if response.status_code == 200:
                 flash('User was created successfully', category="message")
                 return redirect(url_for('SignUp', success="true"))
@@ -129,7 +129,7 @@ def CreateUser():
 
 @app.route('/delete-property/<id>/<email>/<isowner>', methods = ['GET'])
 def DeleteProperty(id, email, isowner):
-    response = requests.delete('http://192.168.100.165:3000/api/property/delete/'+id)
+    response = requests.delete('http://192.168.0.7:3000/api/property/delete/'+id)
     if response.status_code == 200:
         flash('Property Removed Successfully')
         return redirect(url_for('List', email = email, isowner = isowner))
@@ -162,7 +162,7 @@ def CreateProperty(email):
         email = request.form['email']
         payload = {'title': title, 'type': _type, 'address': address, 'rooms': rooms, 'price': price, 'area': area, 'landlord': email}
         try:
-            response = requests.post('http://192.168.100.165:3000/api/property/add', data=payload)
+            response = requests.post('http://192.168.0.7:3000/api/property/add', data=payload)
             if response.status_code == 200:
                 flash('Property was created successfully', category="message")
                 return redirect(url_for('List', email = email, isowner = True))
@@ -179,7 +179,7 @@ def CreateProperty(email):
 @app.route('/update/<id>', methods = ['POST', 'GET'])
 def get_property(id):
     payload = {'id': id}
-    response = requests.post('http://192.168.100.165:3000/api/property/get', data=payload)
+    response = requests.post('http://192.168.0.7:3000/api/property/get', data=payload)
     json = response.json()
     if response.status_code == 200:
         data = json["res"]["data"][0]["item"]
@@ -196,7 +196,7 @@ def update_property(id):
         area = request.form['area']
         email = request.form['email']
         payload = {'title': title, 'type': _type, 'address': address, 'rooms': rooms, 'price': price, 'area': area, 'landlord': email}
-        response = requests.put('http://192.168.100.165:3000/api/property/update/'+id, data=payload)
+        response = requests.put('http://192.168.0.7:3000/api/property/update/'+id, data=payload)
         if response.status_code == 200:
             flash('Property Updated Successfully')
             return redirect(url_for('RedirectUser', email = email))
