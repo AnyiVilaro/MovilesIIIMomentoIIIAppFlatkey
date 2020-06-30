@@ -27,15 +27,18 @@ function ListProperties({ route, navigation }) {
     const fetchProperties = async () => {            
         if(email == "" && endpoint == ''){            
             endpoint = 'list';
-        }else if(endpoint == ''){ 
+        }else if(email != "" && endpoint == '' && isowner == false){ 
+            endpoint = 'list';
+        }else if(endpoint == '' && isowner == true){ 
             endpoint = 'listByUser?email='+email;
         }
 
-        if(email != "" && endpoint == 'listSorted'){
+        if(email != "" && endpoint == 'listSorted' && isowner == true){
             endpoint = 'listSortedByUser?email='+email;
         }
-        
-        let response = await fetch('http://192.168.0.7:3000/api/property/'+endpoint).catch((error) => {
+        console.log("email: "+email+" endpoint: "+endpoint)
+
+        let response = await fetch('http://192.168.100.165:3000/api/property/'+endpoint).catch((error) => {
              Alert.alert("Network Error","An error has ocurred: " + error);
             });        
         let json = await response.json();
